@@ -1,0 +1,7 @@
+{
+  "name": "Manhwa Web Application",
+  "description": "Mobile-first manhwa web reader featuring 10 chapters, 6 episodes per chapter, seamless 100-panel vertical scroll, lazy loading, bookmark progress, admin panel, and GoDaddy cPanel export readiness.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

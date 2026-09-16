@@ -1,0 +1,55 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Global Safety Net: default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'celsosingo@gmail.com' ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    // Public readable Manhwa series catalog
+    match /series/{seriesId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Chapters: public read, admin write
+    match /chapters/{chapterId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Episodes & Panel URLs: public read, admin write
+    match /episodes/{episodeId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // User Bookmarks and Reading Progress
+    match /users/{userId}/bookmarks/{bookmarkId} {
+      allow read, delete: if isOwner(userId);
+      allow create, update: if isOwner(userId) && request.resource.data.userId == userId;
+    }
+
+    // Admins list
+    match /admins/{adminId} {
+      allow read: if isSignedIn();
+      allow write: if false;
+    }
+  }
+}

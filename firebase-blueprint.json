@@ -1,0 +1,87 @@
+{
+  "entities": {
+    "ManhwaSeries": {
+      "title": "ManhwaSeries",
+      "description": "Metadata for the manhwa webtoon series",
+      "type": "object",
+      "properties": {
+        "seriesId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 200 },
+        "synopsis": { "type": "string", "maxLength": 4000 },
+        "coverUrl": { "type": "string", "maxLength": 1000 },
+        "bannerUrl": { "type": "string", "maxLength": 1000 },
+        "author": { "type": "string", "maxLength": 100 },
+        "genre": { "type": "string", "maxLength": 100 },
+        "status": { "type": "string", "maxLength": 50 },
+        "totalChapters": { "type": "number" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["seriesId", "title", "synopsis", "coverUrl"]
+    },
+    "Chapter": {
+      "title": "Chapter",
+      "description": "A chapter containing multiple episodes",
+      "type": "object",
+      "properties": {
+        "chapterId": { "type": "string", "maxLength": 128 },
+        "seriesId": { "type": "string", "maxLength": 128 },
+        "chapterNumber": { "type": "number" },
+        "title": { "type": "string", "maxLength": 200 },
+        "episodeCount": { "type": "number" },
+        "description": { "type": "string", "maxLength": 2000 }
+      },
+      "required": ["chapterId", "chapterNumber", "title"]
+    },
+    "Episode": {
+      "title": "Episode",
+      "description": "An individual episode with ordered panel URLs",
+      "type": "object",
+      "properties": {
+        "episodeId": { "type": "string", "maxLength": 128 },
+        "chapterId": { "type": "string", "maxLength": 128 },
+        "chapterNumber": { "type": "number" },
+        "episodeNumber": { "type": "number" },
+        "title": { "type": "string", "maxLength": 200 },
+        "panelUrls": { "type": "array", "description": "Ordered array of image URLs for the panels" },
+        "panelCount": { "type": "number" },
+        "releaseDate": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["episodeId", "chapterId", "episodeNumber", "title", "panelUrls"]
+    },
+    "Bookmark": {
+      "title": "Bookmark",
+      "description": "Saved reading progress for a user",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "seriesId": { "type": "string", "maxLength": 128 },
+        "chapterId": { "type": "string", "maxLength": 128 },
+        "episodeId": { "type": "string", "maxLength": 128 },
+        "chapterNumber": { "type": "number" },
+        "episodeNumber": { "type": "number" },
+        "lastPanelIndex": { "type": "number" },
+        "scrollPercent": { "type": "number" },
+        "updatedAt": { "type": "string", "maxLength": 100 }
+      },
+      "required": ["userId", "episodeId", "chapterNumber", "episodeNumber"]
+    }
+  },
+  "firestore": {
+    "/series/{seriesId}": {
+      "schema": "ManhwaSeries",
+      "description": "Manhwa series metadata and synopsis"
+    },
+    "/chapters/{chapterId}": {
+      "schema": "Chapter",
+      "description": "Collection of chapters 1-10"
+    },
+    "/episodes/{episodeId}": {
+      "schema": "Episode",
+      "description": "Collection of episodes with ordered panel URLs"
+    },
+    "/users/{userId}/bookmarks/{bookmarkId}": {
+      "schema": "Bookmark",
+      "description": "User reading history and progress bookmarks"
+    }
+  }
+}
