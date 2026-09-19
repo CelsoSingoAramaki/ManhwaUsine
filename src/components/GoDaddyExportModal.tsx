@@ -91,6 +91,51 @@ export const GoDaddyExportModal: React.FC<GoDaddyExportModalProps> = ({ isOpen, 
           </div>
         </div>
 
+        {/* Download Buttons Section */}
+        <div className="mb-6 p-5 rounded-2xl bg-gradient-to-r from-purple-950/40 via-cyan-950/30 to-gray-900 border border-purple-500/40 shadow-xl">
+          <div className="flex items-center gap-2 mb-3">
+            <Download className="w-5 h-5 text-emerald-400" />
+            <h3 className="font-bold text-sm text-white">Pre-Packaged ZIP Downloads Ready</h3>
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold ml-auto">
+              Generated & Verified
+            </span>
+          </div>
+          <p className="text-xs text-gray-300 mb-4 leading-relaxed">
+            We packed the complete, optimized production distribution for your GoDaddy Linux shared server. You can download the ready-to-upload ZIP or the complete source code archive below:
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <a
+              href="/downloads/godaddy-cpanel-dist.zip"
+              download="godaddy-cpanel-dist.zip"
+              className="flex items-center justify-between p-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm shadow-lg shadow-emerald-950/50 transition-all hover:scale-[1.02] active:scale-[0.98] group"
+            >
+              <div className="flex items-center gap-2.5">
+                <FolderArchive className="w-5 h-5 flex-shrink-0" />
+                <div className="text-left">
+                  <div>godaddy-cpanel-dist.zip</div>
+                  <div className="text-[10px] font-normal text-emerald-100">Ready for public_html (323 KB)</div>
+                </div>
+              </div>
+              <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+            </a>
+
+            <a
+              href="/downloads/manhwa-source-code.zip"
+              download="manhwa-source-code.zip"
+              className="flex items-center justify-between p-3.5 rounded-xl bg-gray-800 hover:bg-gray-700 text-gray-200 border border-gray-700 font-bold text-xs sm:text-sm shadow-md transition-all hover:scale-[1.02] active:scale-[0.98] group"
+            >
+              <div className="flex items-center gap-2.5">
+                <FileCode className="w-5 h-5 text-purple-400 flex-shrink-0" />
+                <div className="text-left">
+                  <div>manhwa-source-code.zip</div>
+                  <div className="text-[10px] font-normal text-gray-400">Complete TypeScript Source (78 KB)</div>
+                </div>
+              </div>
+              <Download className="w-4 h-4 text-purple-300 group-hover:translate-y-0.5 transition-transform" />
+            </a>
+          </div>
+        </div>
+
         {/* Step-by-Step Instructions */}
         <div className="space-y-4 mb-6">
           <div className="p-4 rounded-xl bg-gray-900/80 border border-gray-800 flex items-start gap-3.5">
